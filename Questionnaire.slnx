@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Questionnaire.Application/Questionnaire.Application.csproj" />
+  <Project Path="Questionnaire.DataAccess/Questionnaire.DataAccess.csproj" />
+  <Project Path="Questionnaire.SharedKernel/Questionnaire.SharedKernel.csproj" />
+  <Project Path="Questionnaire.WebApi/Questionnaire.WebApi.csproj" Id="6b68d8e7-1cbe-4d46-bcee-783bb7cb2f00" />
+</Solution>
