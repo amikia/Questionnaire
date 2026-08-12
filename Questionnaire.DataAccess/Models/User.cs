@@ -6,9 +6,12 @@ namespace Questionnaire.DataAccess.Models;
 public class User : BaseEntity
 {
     public required string Username { get; set; }
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
+    public required string Firstname { get; set; }
+    public required string Lastname { get; set; }
+    public required string PhoneNumber { get; set; }
     public required string PasswordHash { get; set; }
+
+    public string FullName() => Firstname + ' ' + Lastname;
 }
 
 public class UserConfiguration : BaseEntityConfigurations<User>

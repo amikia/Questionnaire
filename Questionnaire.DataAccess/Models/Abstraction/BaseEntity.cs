@@ -9,7 +9,7 @@ public interface IBaseEntity
 
 public abstract class BaseEntity : IBaseEntity 
 {
-    public required Guid Id { get; set; } 
+    public required Guid Id { get; set; } = new Guid();
     public DateTime InsertDate { get; set; } = DateTime.UtcNow;
     public DateTime? UpdateDate { get; set; }
     public string InsertUser { get; set; } = "System";
