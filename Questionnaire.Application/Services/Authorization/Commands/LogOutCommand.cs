@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FluentValidation;
+using Questionnaire.SharedKernel.Cqrs;
 
-namespace Questionnaire.Application.Services.Authorization.Commands
+namespace Questionnaire.Application.Services.Authorization.Commands;
+
+public record LogOutCommand() : IRequest<bool>;
+
+public sealed class LogOutCommandValidator : AbstractValidator<LogOutCommand>
 {
-    internal class LogOutCommand
-    {
-    }
+	public LogOutCommandValidator()
+	{
+		
+	}
 }
