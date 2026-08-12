@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Questionnaire.DataAccess.Context;
+using Questionnaire.DataAccess.DomainRepositories;
 using Questionnaire.DataAccess.Models.Abstraction;
 
 namespace Questionnaire.DataAccess.UnitOfWork;
@@ -9,21 +10,29 @@ public interface IUnitOfWork
 {
     Task<int> CommitAsync(CancellationToken cancellationToken);
     Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken);
+
+    IUserRepository User { get; }
 }
 
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
+    private readonly IUserRepository _user;
 
     public UnitOfWork
         (
-            ApplicationDbContext context
+            ApplicationDbContext context,
+            IUserRepository user
 
         )
     {
         _context = context;
+        _user = user;
     }
+
+    public IUserRepository User => _user;
+
 
     public async Task<int> CommitAsync(CancellationToken cancellationToken)
     {
@@ -34,12 +43,12 @@ public class UnitOfWork : IUnitOfWork
             foreach (var entityEntry in entries)
             {
                 ((BaseEntity)entityEntry.Entity).UpdateDate = DateTime.Now;
-                ((BaseEntity)entityEntry.Entity).UpdateUser = "System";
+                ((BaseEntity)entityEntry.Entity).UpdateUser = await _user.GetCurrentUserNameAsync(cancellationToken);
 
                 if (entityEntry.State == EntityState.Added)
                 {
                     ((BaseEntity)entityEntry.Entity).InsertDate = DateTime.Now;
-                    ((BaseEntity)entityEntry.Entity).InsertUser = "System";
+                    ((BaseEntity)entityEntry.Entity).InsertUser = await _user.GetCurrentUserNameAsync(cancellationToken);
                 }
             }
 
