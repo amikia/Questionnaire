@@ -21,8 +21,6 @@ public class JwtService(IConfiguration configuration) : IJwtService
         {
             new(ClaimTypes.NameIdentifier, id.ToString()),
             new(ClaimTypes.Name, username),
-            new(ClaimTypes.GivenName, firstname),
-            new(ClaimTypes.Surname, lastname),
             new(ClaimTypes.MobilePhone, phoneNumber)
         };
 
