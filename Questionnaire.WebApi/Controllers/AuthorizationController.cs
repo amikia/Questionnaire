@@ -34,6 +34,16 @@ public class AuthorizationController(IDispatcher dispatcher, ILogger logger) : B
     }
 
     [Authorize]
+    [HttpPost]
+    [Route(nameof(ChangePassword))]
+    public async Task<ActionResult<ApiResponse<bool>>> ChangePassword(ChangePasswordCommand request, CancellationToken cancellationToken)
+    {
+        return ApiResponse<bool>.Success(
+            await _dispatcher.Dispatch<ChangePasswordCommand, bool>(
+                request, cancellationToken));
+    }
+
+    [Authorize]
     [HttpGet]
     [Route(nameof(GetCurrentUser))]
     public async Task<ActionResult<ApiResponse<GetCurrentUserDto>>> GetCurrentUser(CancellationToken cancellationToken)

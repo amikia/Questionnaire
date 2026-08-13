@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Questionnaire.SharedKernel.Classes;
 
-namespace Questionnaire.SharedKernel.Classes
+public static class StaticVariable
 {
-    internal class StaticVariable
-    {
-    }
+    public const string tokenName = "access_token";
+    public const string defaultPassword = "sp123456"; 
 }

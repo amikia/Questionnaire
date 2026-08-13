@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Questionnaire.DataAccess.Models;
 using Questionnaire.DataAccess.UnitOfWork;
+using Questionnaire.SharedKernel.Classes;
 using Questionnaire.SharedKernel.Cqrs;
 using Questionnaire.SharedKernel.ErrorMessages;
 using Questionnaire.SharedKernel.Exceptions;
@@ -33,10 +34,10 @@ public class AuthorizeWithPasswordCommandHandler(
             if (passwordResult == PasswordVerificationResult.Failed) 
                 throw new CustomException(Resource.The_desired_information_does_not_found);
 
-            var token = _jwtService.GenerateToken(user.Id.ToString(), user.Username, user.Firstname, user.Lastname, user.PhoneNumber);
+            var token = _jwtService.GenerateToken(user.Id.ToString(), user.Username, user.PhoneNumber);
 
             _httpContextAccessor.HttpContext!.Response.Cookies.Append(
-                "access_token",
+                StaticVariable.tokenName,
                 token,
                 new CookieOptions
                 {

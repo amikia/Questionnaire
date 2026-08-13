@@ -8,14 +8,14 @@ namespace Questionnaire.SharedKernel.Services;
 
 public interface IJwtService
 {
-    string GenerateToken(string id, string username, string firstname, string lastname, string phoneNumber);
+    string GenerateToken(string id, string username, string phoneNumber);
 }
 
 public class JwtService(IConfiguration configuration) : IJwtService
 {
     private readonly IConfiguration _configuration = configuration;
 
-    public string GenerateToken(string id, string username, string firstname, string lastname, string phoneNumber)
+    public string GenerateToken(string id, string username, string phoneNumber)
     {
         var claims = new List<Claim>
         {
