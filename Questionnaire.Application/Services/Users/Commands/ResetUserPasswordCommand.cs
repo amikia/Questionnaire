@@ -1,15 +1,14 @@
 ﻿using FluentValidation;
 using Questionnaire.SharedKernel.Cqrs;
 using Questionnaire.SharedKernel.ErrorMessages;
-using Questionnaire.SharedKernel.ModelDtos.Users.Commands;
 
 namespace Questionnaire.Application.Services.Users.Commands;
 
-public record DeleteUserCommand(Guid Id) : IRequest<DeleteUserResponse>;
+public record ResetUserPasswordCommand(Guid Id) : IRequest<bool>;
 
-public sealed class DeleteUserCommandValidator : AbstractValidator<DeleteUserCommand>
+public sealed class ResetUserPasswordCommandValidator : AbstractValidator<ResetUserPasswordCommand>
 {
-    public DeleteUserCommandValidator()
+    public ResetUserPasswordCommandValidator()
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage(Resource.Entering_this_field_is_required);

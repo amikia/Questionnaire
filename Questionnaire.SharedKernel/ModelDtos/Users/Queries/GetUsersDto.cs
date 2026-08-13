@@ -1,10 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Questionnaire.SharedKernel.ModelDtos.Users.Queries;
 
-namespace Questionnaire.SharedKernel.ModelDtos.Users.Queries
-{
-    internal class GetUsersDto
-    {
-    }
-}
+public record GetUsersDto(string Id, string Fullname);
